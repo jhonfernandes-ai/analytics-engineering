@@ -1,0 +1,66 @@
+name: 'adventureworks'
+version: '1.0.0'
+config-version: 2
+
+profile: 'default'
+
+# Diretórios do projeto
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+#################################################
+# MODELOS
+#################################################
+
+models:
+  adventureworks:
+
+    +catalog: adventureworks
+
+    staging:
+      +schema: silver
+      +materialized: view
+
+    intermediate:
+      +schema: silver
+      +materialized: view
+
+    marts:
+      +schema: gold
+      +materialized: table
+
+#################################################
+# SEEDS (Bronze)
+#################################################
+
+seeds:
+  adventureworks:
+
+    +catalog: adventureworks
+    +schema: bronze
+
+#################################################
+# TESTES
+#################################################
+
+tests:
+  +store_failures: true
+
+#################################################
+# QUOTES
+#################################################
+
+quoting:
+  database: false
+  schema: false
+  identifier: false
