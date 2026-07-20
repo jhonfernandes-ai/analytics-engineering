@@ -1,0 +1,118 @@
+version: 2
+
+sources:
+  - name: bronze
+    description: Camada Bronze contendo os dados brutos do AdventureWorks carregados no Databricks.
+
+    catalog: adventureworks
+    schema: bronze
+
+    tables:
+
+# ==========================
+# SALES
+# ==========================
+
+      - name: salesorderheader
+        description: Cabeçalho dos pedidos de venda.
+
+      - name: salesorderdetail
+        description: Itens dos pedidos de venda.
+
+      - name: customer
+        description: Cadastro de clientes.
+
+      - name: creditcard
+        description: Cadastro de cartões de crédito.
+
+      - name: salesreason
+        description: Cadastro dos motivos de venda.
+
+      - name: salesorderheadersalesreason
+        description: Relação entre pedidos e motivos de venda.
+
+      - name: salesperson
+        description: Cadastro dos vendedores.
+
+      - name: salesterritory
+        description: Cadastro dos territórios de venda.
+
+      - name: specialoffer
+        description: Cadastro das ofertas promocionais.
+
+      - name: specialofferproduct
+        description: Relação entre ofertas promocionais e produtos.
+
+      - name: store
+        description: Cadastro das lojas (revendedores).
+
+      - name: currency
+        description: Cadastro das moedas.
+
+      - name: currencyrate
+        description: Taxas de conversão entre moedas.
+
+      - name: countryregioncurrency
+        description: Relação entre países e moedas.
+
+      # ==========================
+      # PERSON
+      # ==========================
+
+      - name: person
+        description: Cadastro de pessoas.
+
+      - name: businessentity
+        description: Cadastro das entidades de negócio.
+
+      - name: address
+        description: Cadastro de endereços.
+
+      - name: stateprovince
+        description: Cadastro dos estados e províncias.
+
+      - name: countryregion
+        description: Cadastro dos países.
+
+      - name: businessentityaddress
+        description: Relação entre entidades de negócio e endereços.
+
+      - name: addresstype
+        description: Tipos de endereço.
+
+      - name: emailaddress
+        description: Endereços de e-mail das pessoas.
+
+      - name: personphone
+        description: Telefones das pessoas.
+
+      - name: phonenumbertype
+        description: Tipos de telefone.
+
+      # ==========================
+      # PRODUCTION
+      # ==========================
+
+      - name: productmodel
+        description: Cadastro dos modelos de produtos.
+
+      - name: productdescription
+        description: Cadastro das descrições dos produtos.
+
+      - name: productmodelproductdescriptionculture
+        description: Relação entre modelos, descrições e idiomas.
+      - name: product
+        description: Cadastro de produtos.
+
+      - name: productsubcategory
+        description: Cadastro das subcategorias de produtos.
+
+      - name: productcategory
+        description: Cadastro das categorias de produtos.
+
+      # ==========================
+      # PURCHASING
+      # ==========================
+
+      - name: vendor
+        description: Cadastro de fornecedores.

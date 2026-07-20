@@ -1,0 +1,50 @@
+name: adventureworks
+
+version: '1.0.0'
+
+config-version: 2
+
+profile: adventureworks
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+analysis-paths: ["analyses"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  adventureworks:
+
+    staging:
+      +catalog: adventureworks
+      +schema: silver
+      +materialized: view
+
+    intermediate:
+      +catalog: adventureworks
+      +schema: silver
+      +materialized: view
+
+    marts:
+      +catalog: adventureworks
+      +schema: gold
+      +materialized: table
+
+seeds:
+  adventureworks:
+    +catalog: adventureworks
+    +schema: bronze
+
+tests:
+  +store_failures: true
+
+quoting:
+  database: false
+  schema: false
+  identifier: false

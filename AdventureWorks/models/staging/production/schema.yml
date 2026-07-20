@@ -1,0 +1,12 @@
+version: 2
+
+models:
+
+  - name: stg_production__product
+    description: Modelo de staging responsável pelo cadastro de produtos.
+
+  - name: stg_production__product_subcategory
+    description: Modelo de staging responsável pelas subcategorias de produtos.
+
+  - name: stg_production__product_category
+    description: Modelo de staging responsável pelas categorias de produtos.
