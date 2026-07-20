@@ -1,0 +1,37 @@
+models
+│
+├── sources.yml
+│
+├── staging
+│   │
+│   ├── sales
+│   │     ├── schema.yml
+│   │     ├── stg_salesorderheader.sql
+│   │     ├── stg_salesorderdetail.sql
+│   │     ├── stg_customer.sql
+│   │     ├── stg_creditcard.sql
+│   │     ├── stg_salesreason.sql
+│   │     ├── stg_salesorderheadersalesreason.sql
+│   │     ├── stg_salesperson.sql
+│   │     └── stg_salesterritory.sql
+│   │
+│   ├── production
+│   │     ├── schema.yml
+│   │     ├── stg_product.sql
+│   │     ├── stg_productsubcategory.sql
+│   │     └── stg_productcategory.sql
+│   │
+│   ├── person
+│   │     ├── schema.yml
+│   │     ├── stg_person.sql
+│   │     ├── stg_businessentity.sql
+│   │     ├── stg_address.sql
+│   │     ├── stg_stateprovince.sql
+│   │     └── stg_countryregion.sql
+│   │
+│   └── purchasing
+│         └── schema.yml
+│
+├── intermediate
+│
+└── marts
