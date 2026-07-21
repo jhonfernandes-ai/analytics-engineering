@@ -1,27 +1,22 @@
 /*
 ------------------------------------------------------------------------------
 Modelo.......: int_person__customer
-Camada.......: Intermediate
-Origem.......:
-    - stg_sales__customer
-    - stg_person__person
-    - stg_sales__store
-    - stg_person__business_entity
 
 Descrição....:
-Consolida as informações dos clientes provenientes das tabelas de
-staging, criando uma única entidade de negócio que servirá de base
-para a dimensão de clientes.
+Consolida informações de clientes do AdventureWorks, unificando
+clientes pessoa física e clientes corporativos.
 
-Nesta etapa são aplicadas regras de negócio para:
+Enriquece os dados com:
 
-- identificação do tipo de cliente;
-- construção do nome completo da pessoa;
-- definição do nome do cliente (pessoa ou loja);
-- consolidação dos atributos principais.
+- Pessoa
+- Loja
+- Endereço
+- Estado
+- País
 
-Autor........: Jonathas Fernandes
-Projeto......: AdventureWorks Analytics Engineering Challenge
+Granularidade:
+1 registro por customer.
+
 ------------------------------------------------------------------------------
 */
 
@@ -48,69 +43,96 @@ store as (
 
 ),
 
-business_entity as (
+person_address as (
 
     select *
-    from {{ ref('stg_person__business_entity') }}
+    from {{ ref('stg_person__business_entity_address') }}
+
+    where address_type_id = 2
+
+),
+
+store_address as (
+
+    select *
+    from {{ ref('stg_person__business_entity_address') }}
+
+    where address_type_id = 3
+
+),
+
+address as (
+
+    select *
+    from {{ ref('stg_person__address') }}
+
+),
+
+state_province as (
+
+    select *
+    from {{ ref('stg_person__state_province') }}
+
+),
+
+country_region as (
+
+    select *
+    from {{ ref('stg_person__country_region') }}
 
 )
 
 select
 
-    -- Identificação
-    customer.customer_id,
-    customer.business_entity_id,
+    -- Customer
+    c.customer_id,
+    c.account_number,
+    c.territory_id,
 
-    -- Relacionamentos
-    customer.person_id,
-    customer.store_id,
-    customer.territory_id,
+    c.person_id,
+    c.store_id,
 
-    -- Dados da pessoa
-    person.person_type,
+    -- Pessoa
+    p.first_name,
+    p.middle_name,
+    p.last_name,
 
-    concat_ws(
-        ' ',
-        person.first_name,
-        person.middle_name,
-        person.last_name
-    ) as full_name,
+    -- Loja
+    s.store_name,
 
-    -- Dados da loja
-    store.store_name,
+    -- Endereço
+    a.address_line_1,
+    a.address_line_2,
+    a.city,
+    a.state_province_id,
+    a.postal_code,
 
-    -- Tipo do cliente
-    case
-        when customer.person_id is not null then 'Individual'
-        when customer.store_id is not null then 'Store'
-        else 'Unknown'
-    end as customer_type,
+    -- Localização
+    sp.state_province_name,
+    sp.state_province_code,
 
-    -- Nome do cliente
-    case
-        when customer.person_id is not null then
-            concat_ws(
-                ' ',
-                person.first_name,
-                person.middle_name,
-                person.last_name
-            )
+    cr.country_region_name,
+    cr.country_region_code
 
-        when customer.store_id is not null then
-            store.store_name
+from customer c
 
-    end as customer_name,
+left join person p
+    on c.person_id = p.business_entity_id
 
-    -- Auditoria
-    business_entity.modified_date
+left join store s
+    on c.store_id = s.business_entity_id
 
-from customer
+left join person_address pa
+    on c.person_id = pa.business_entity_id
 
-left join person
-    on customer.person_id = person.business_entity_id
+left join store_address sa
+    on c.store_id = sa.business_entity_id
 
-left join store
-    on customer.store_id = store.business_entity_id
+left join address a
+    on a.address_id = coalesce(pa.address_id, sa.address_id)
 
-left join business_entity
-    on customer.business_entity_id = business_entity.business_entity_id
+left join state_province sp
+    on a.state_province_id = sp.state_province_id
+
+left join country_region cr
+    on sp.country_region_code = cr.country_region_code

@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: int_sales__sales_order
+    description: >
+      Consolida as informações operacionais das vendas na granularidade 
+      de um item por pedido. Junta cabeçalho, detalhe, território, 
+      vendedor, ofertas e cartões.
+    
+    columns:
+      - name: sales_order_id
+        description: Identificador do pedido de venda (Chave Estrangeira para o cabeçalho).
+        
+      - name: sales_order_detail_id
+        description: Identificador único do item dentro do pedido (Chave Primária).
+        tests:
+          - unique
+          - not_null
+
+      - name: order_date
+        description: Data de criação do pedido.
+        tests:
+          - not_null
+
+      - name: order_quantity
+        description: Quantidade de itens comprados nesta linha do pedido.
+
+      - name: unit_price_amount
+        description: Preço unitário de venda do produto.
+
+      - name: unit_price_discount_amount
+        description: Desconto aplicado no preço unitário.
+
+      - name: line_total_amount
+        description: Total da linha calculado pelo sistema fonte (ERP).

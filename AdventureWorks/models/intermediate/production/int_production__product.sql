@@ -1,3 +1,17 @@
+/*
+------------------------------------------------------------------------------
+Modelo.......: int_production_product
+
+Descrição....:
+Consolida as informações operacionais dos produtos na granularidade
+de um item por pedido.
+
+Granularidade:
+1 registro por item de produto (Product).
+
+------------------------------------------------------------------------------
+*/
+
 {{ config(materialized='view') }}
 
 with product as (
@@ -50,6 +64,7 @@ select
 
     -- Subcategoria
     s.product_subcategory_name,
+    s.product_category_id,
 
     -- Categoria
     c.product_category_name,
