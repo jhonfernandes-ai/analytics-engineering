@@ -1,11 +1,11 @@
 /*
 ------------------------------------------------------------------------------
-Modelo.......: stg_production__product_category
+Modelo.......: stg_production__product_model
 Camada.......: Staging
-Origem.......: adventureworks.bronze.productcategory
+Origem.......: adventureworks.bronze.productmodel
 
 Descrição....:
-Padroniza os dados da tabela ProductCategory da camada Bronze.
+Padroniza os dados da tabela ProductModel da camada Bronze.
 
 Nesta etapa são realizadas apenas:
 - padronização dos nomes das colunas para snake_case;
@@ -22,14 +22,16 @@ Projeto......: AdventureWorks Analytics Engineering Challenge
 
 select
 
-    -- Identificação da categoria
-    ProductCategoryID      as product_category_id,
+    -- Identificação do modelo
+    ProductModelID            as product_model_id,
 
-    -- Descrição
-    Name                   as product_category_name,
+    -- Informações do modelo
+    Name                      as product_model_name,
+    CatalogDescription        as catalog_description,
+    Instructions              as instructions,
 
     -- Auditoria
-    rowguid                as row_guid,
-    ModifiedDate           as modified_date
+    rowguid                   as row_guid,
+    ModifiedDate              as modified_date
 
-from {{ source('bronze', 'productcategory') }}
+from {{ source('bronze', 'productmodel') }}

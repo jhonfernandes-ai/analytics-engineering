@@ -1,0 +1,71 @@
+intermediate/
+
+sales/
+├── int_sales__orders
+├── int_sales__order_items
+├── int_sales__sales_reason
+└── int_sales__promotion
+
+person/
+├── int_person__customer
+└── int_person__geography
+
+production/
+└── int_production__product
+
+
+                               BI
+                                │
+                          Power BI
+                                │
+                           fact_sales
+                                │
+ ┌────────────┬────────────┬────────────┬────────────┐
+ │            │            │            │            │
+ │            │            │            │            │
+ ▼            ▼            ▼            ▼            ▼
+dim_date  dim_customer dim_product dim_geography dim_credit_card
+                                │
+                                │
+                  dim_sales_reason
+                                │
+                  dim_sales_person
+                                │
+                 dim_sales_territory
+                                │
+                    dim_promotion
+                                ▲
+                                │
+──────────────────────────────────────────────────────────────
+                    INTERMEDIATE
+──────────────────────────────────────────────────────────────
+
+int_sales__orders
+
+int_sales__order_items
+
+int_sales__sales_reason
+
+int_sales__promotion
+
+int_person__customer
+
+int_person__geography
+
+int_production__product
+
+──────────────────────────────────────────────────────────────
+                        STAGING
+──────────────────────────────────────────────────────────────
+
+Sales
+
+Person
+
+Production
+
+──────────────────────────────────────────────────────────────
+                        BRONZE
+──────────────────────────────────────────────────────────────
+
+AdventureWorks
