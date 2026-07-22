@@ -2,19 +2,20 @@ version: 2
 
 models:
 
+  # ==========================================================
+  # stg_sales__order_header
+  # ==========================================================
   - name: stg_sales__order_header
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       SalesOrderHeader da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: sales_order_id
         description: Identificador único do pedido de venda.
-        tests:
+        data_tests:
           - unique
           - not_null
 
@@ -91,15 +92,13 @@ models:
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       SpecialOffer da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: special_offer_id
         description: Identificador único da oferta.
-        tests:
+        data_tests:
           - unique
           - not_null
 
@@ -142,16 +141,15 @@ models:
       pedidos de venda provenientes da tabela SalesOrderDetail da camada Bronze.
 
     columns:
-
       - name: sales_order_detail_id
         description: Identificador único do item do pedido.
-        tests:
+        data_tests:
           - unique
           - not_null
 
       - name: sales_order_id
         description: Identificador do pedido de venda.
-        tests:
+        data_tests:
           - not_null
 
       - name: carrier_tracking_number
@@ -159,7 +157,7 @@ models:
 
       - name: product_id
         description: Identificador do produto vendido.
-        tests:
+        data_tests:
           - not_null
 
       - name: special_offer_id
@@ -167,7 +165,7 @@ models:
 
       - name: order_quantity
         description: Quantidade vendida do produto.
-        tests:
+        data_tests:
           - not_null
 
       - name: unit_price_amount
@@ -192,15 +190,13 @@ models:
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       Customer da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: customer_id
         description: Identificador único do cliente.
-        tests:
+        data_tests:
           - unique
           - not_null
 
@@ -229,15 +225,13 @@ models:
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       SalesReason da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: sales_reason_id
         description: Identificador único do motivo da venda.
-        tests:
+        data_tests:
           - unique
           - not_null
 
@@ -257,20 +251,18 @@ models:
     description: >
       Modelo de staging responsável por padronizar os relacionamentos
       entre pedidos de venda e seus respectivos motivos.
-
       Esta é uma tabela associativa (bridge table) entre SalesOrderHeader
       e SalesReason.
 
     columns:
-
       - name: sales_order_id
         description: Identificador do pedido de venda.
-        tests:
+        data_tests:
           - not_null
 
       - name: sales_reason_id
         description: Identificador do motivo da venda.
-        tests:
+        data_tests:
           - not_null
 
       - name: modified_date
@@ -283,20 +275,18 @@ models:
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       SpecialOfferProduct da camada Bronze.
-
       Esta tabela representa o relacionamento entre produtos e ofertas especiais.
       Nenhuma regra de negócio é aplicada nesta etapa.
 
     columns:
-
       - name: special_offer_id
         description: Identificador da oferta especial.
-        tests:
+        data_tests:
           - not_null
 
       - name: product_id
         description: Identificador do produto.
-        tests:
+        data_tests:
           - not_null
 
       - name: row_guid
@@ -304,7 +294,7 @@ models:
 
       - name: modified_date
         description: Data da última atualização do registro.
-        
+
   # ==========================================================
   # stg_sales__store
   # ==========================================================
@@ -312,15 +302,13 @@ models:
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       Store da camada Bronze.
-
       Esta tabela contém o cadastro das lojas (revendedores), incluindo o
       vendedor responsável e informações demográficas.
 
     columns:
-
       - name: business_entity_id
         description: Identificador da entidade de negócio da loja.
-        tests:
+        data_tests:
           - unique
           - not_null
 
@@ -346,14 +334,12 @@ models:
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       Currency da camada Bronze.
-
       Esta tabela contém o cadastro das moedas utilizadas pelo AdventureWorks.
 
     columns:
-
       - name: currency_code
         description: Código ISO da moeda.
-        tests:
+        data_tests:
           - unique
           - not_null
 
@@ -367,17 +353,15 @@ models:
   # stg_sales__currency_rate
   # ==========================================================
   - name: stg_sales__currency_rate
-    description:   
+    description: >
       Modelo de staging responsável por padronizar os dados da tabela
       CurrencyRate da camada Bronze.
-
       Esta tabela contém as taxas de câmbio utilizadas para conversão entre moedas.
 
     columns:
-    
       - name: currency_rate_id
         description: Identificador único da taxa de câmbio.
-        tests:
+        data_tests:
           - unique
           - not_null
 
@@ -403,21 +387,20 @@ models:
   # stg_sales__country_region_currency
   # ==========================================================
   - name: stg_sales__country_region_currency
-    description: 
+    description: >
       Modelo de staging responsável por padronizar os dados da tabela
       CountryRegionCurrency da camada Bronze.
-
       Esta tabela relaciona cada país às moedas utilizadas.
-    columns:
 
+    columns:
       - name: country_region_code
         description: Código do país.
-        tests:
+        data_tests:
           - not_null
 
       - name: currency_code
         description: Código da moeda utilizada pelo país.
-        tests:
+        data_tests:
           - not_null
 
       - name: modified_date
@@ -432,16 +415,15 @@ models:
       de crédito utilizados nos pedidos de venda.
 
     columns:
-
       - name: credit_card_id
         description: Identificador único do cartão de crédito.
-        tests:
+        data_tests:
           - unique
           - not_null
 
       - name: card_type
         description: Tipo do cartão de crédito.
-        tests:
+        data_tests:
           - not_null
 
       - name: card_number
@@ -465,10 +447,9 @@ models:
       vendedores da AdventureWorks.
 
     columns:
-
       - name: business_entity_id
         description: Identificador único do vendedor.
-        tests:
+        data_tests:
           - unique
           - not_null
 
@@ -505,10 +486,9 @@ models:
       territórios de vendas da AdventureWorks.
 
     columns:
-
       - name: territory_id
         description: Identificador único do território.
-        tests:
+        data_tests:
           - unique
           - not_null
 

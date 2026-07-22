@@ -1,0 +1,127 @@
+version: 2
+
+models:
+  # ==========================================
+  # FATO: VENDAS (fact_sales)
+  # ==========================================
+  - name: fact_sales
+    description: "Tabela Fato central de vendas contendo métricas de receita, quantidade e descontos por item de pedido."
+    columns:
+      - name: sales_order_detail_id
+        description: "Chave primária do item do pedido."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: sales_order_id
+        description: "Identificador único do pedido."
+        data_tests:
+          - not_null
+
+      - name: product_id
+        description: "Chave estrangeira para dim_product."
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_product')
+              field: 'product_id'
+
+      - name: customer_id
+        description: "Chave estrangeira para dim_customer."
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: 'customer_id'
+
+      - name: credit_card_id
+        description: "Chave estrangeira para o cartão de crédito utilizado na compra."
+
+      - name: territory_id
+        description: "Chave estrangeira para o território de vendas."
+
+      - name: sales_person_id
+        description: "Chave estrangeira para o vendedor associado ao pedido."
+
+      - name: special_offer_id
+        description: "Chave estrangeira para a oferta promocional aplicada."
+
+      - name: sales_order_number
+        description: "Número do pedido de venda (referência de negócio)."
+
+      - name: status
+        description: "Status de processamento do pedido."
+
+      - name: online_order_flag
+        description: "Indicador (True/False) se o pedido foi realizado online pelo cliente."
+
+      - name: card_type
+        description: "Tipo ou bandeira do cartão de crédito (ex: Vista, SuperiorCard)."
+
+      - name: order_date
+        description: "Data em que o pedido foi realizado."
+        data_tests:
+          - not_null
+
+      - name: due_date
+        description: "Data de vencimento prometida para a entrega do pedido."
+
+      - name: ship_date
+        description: "Data em que o pedido foi despachado/enviado."
+
+      - name: order_quantity
+        description: "Quantidade de itens comprados nesta linha do pedido."
+
+      - name: unit_price_amount
+        description: "Preço unitário de venda do produto."
+
+      - name: unit_price_discount_amount
+        description: "Valor de desconto aplicado diretamente no preço unitário."
+
+      - name: net_amount
+        description: "Valor líquido final da linha de pedido (line_total_amount)."
+        data_tests:
+          - not_null
+
+      - name: gross_amount
+        description: "Valor bruto do item antes da aplicação de descontos."
+
+      - name: total_discount_amount
+        description: "Valor monetário total de desconto aplicado."
+
+      - name: subtotal_amount
+        description: "Valor subtotal do pedido antes da aplicação de impostos e fretes."
+
+      - name: tax_amount
+        description: "Valor de impostos cobrados no pedido."
+
+      - name: freight_amount
+        description: "Valor de frete cobrado no pedido."
+
+      - name: total_due_amount
+        description: "Valor total devido pelo pedido (Subtotal + Impostos + Frete)."
+
+  # ==========================================
+  # PONTE: MOTIVO DE VENDAS (bridge_sales_reason)
+  # ==========================================
+  - name: bridge_sales_reason
+    description: >
+      Tabela ponte (Bridge/Factless Fact) que relaciona os pedidos aos seus 
+      respectivos motivos de venda. Resolve o relacionamento muitos-para-muitos
+      sem duplicar os valores financeiros na fact_sales principal.
+
+    columns:
+      - name: sales_order_id
+        description: "Identificador do pedido. Faz o join com a fact_sales no BI."
+
+      - name: sales_reason_id
+        description: "Identificador único do motivo de venda."
+
+      - name: reason_name
+        description: "Nome interno ou identificador textual do motivo."
+
+      - name: reason_type
+        description: "Categoria do motivo (ex. 'Marketing', 'Other')."
+
+      - name: sales_reason_name
+        description: "Nome do motivo (ex. 'Promotion', 'Price'). Crucial para os filtros do Dashboard."

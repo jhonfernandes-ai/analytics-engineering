@@ -11,7 +11,7 @@ models:
 
       - name: customer_id
         description: Identificador único do cliente.
-        tests:
+        data_tests:
           - unique
           - not_null
 

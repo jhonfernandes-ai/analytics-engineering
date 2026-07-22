@@ -9,27 +9,114 @@ models:
     
     columns:
       - name: sales_order_id
-        description: Identificador do pedido de venda (Chave Estrangeira para o cabeçalho).
+        description: "Identificador do pedido de venda (Chave Estrangeira para o cabeçalho)."
         
       - name: sales_order_detail_id
-        description: Identificador único do item dentro do pedido (Chave Primária).
-        tests:
+        description: "Identificador único do item dentro do pedido (Chave Primária)."
+        data_tests:
           - unique
           - not_null
 
+      - name: product_id
+        description: "Identificador único do produto vendido (Chave Estrangeira)."
+
+      - name: special_offer_id
+        description: "Identificador da oferta promocional aplicada ao item."
+
+      - name: carrier_tracking_number
+        description: "Número de rastreio da transportadora para a entrega do item."
+
+      - name: customer_id
+        description: "Identificador único do cliente que realizou a compra."
+
+      - name: account_number
+        description: "Número da conta do cliente."
+
+      - name: sales_order_number
+        description: "Número de referência público do pedido de venda (ex: SO43659)."
+
       - name: order_date
-        description: Data de criação do pedido.
-        tests:
+        description: "Data de criação do pedido."
+        data_tests:
           - not_null
 
+      - name: due_date
+        description: "Data de vencimento prometida para a entrega do pedido ao cliente."
+
+      - name: ship_date
+        description: "Data em que o pedido foi enviado ou despachado."
+
+      - name: status
+        description: "Status atual do processamento do pedido (ex: 1=Em processo, 5=Enviado)."
+
+      - name: online_order_flag
+        description: "Indica se o pedido foi realizado online pelo cliente (True) ou por um representante de vendas (False)."
+
       - name: order_quantity
-        description: Quantidade de itens comprados nesta linha do pedido.
+        description: "Quantidade de itens comprados nesta linha do pedido."
 
       - name: unit_price_amount
-        description: Preço unitário de venda do produto.
+        description: "Preço unitário de venda do produto."
 
       - name: unit_price_discount_amount
-        description: Desconto aplicado no preço unitário.
+        description: "Desconto aplicado no preço unitário do produto."
 
       - name: line_total_amount
-        description: Total da linha calculado pelo sistema fonte (ERP).
+        description: "Total da linha calculado pelo sistema fonte (ERP)."
+
+      - name: subtotal_amount
+        description: "Valor subtotal do pedido antes da aplicação de impostos e frete."
+
+      - name: tax_amount
+        description: "Valor do imposto cobrado no pedido inteiro."
+
+      - name: freight_amount
+        description: "Valor do frete cobrado para o pedido."
+
+      - name: total_due_amount
+        description: "Valor total devido pelo pedido (Subtotal + Impostos + Frete)."
+
+      - name: territory_id
+        description: "Identificador do território de vendas onde o pedido foi originado."
+
+      - name: territory_name
+        description: "Nome do território de vendas."
+
+      - name: territory_group
+        description: "Grupo ou região maior a qual o território de vendas pertence (ex: North America, Europe)."
+
+      - name: country_region_code
+        description: "Código ISO do país ou região do território de vendas."
+
+      - name: sales_person_id
+        description: "Identificador único do vendedor associado ao pedido, se aplicável."
+
+      - name: sales_quota
+        description: "Cota de vendas estabelecida para o vendedor."
+
+      - name: bonus_amount
+        description: "Valor de bônus atingido pelo vendedor."
+
+      - name: commission_percentage
+        description: "Percentual de comissão associado ao vendedor."
+
+      - name: special_offer_description
+        description: "Descrição textual da oferta especial ou promoção aplicada."
+
+      - name: discount_pct
+        description: "Percentual de desconto concedido pela oferta especial."
+
+      - name: offer_type
+        description: "Tipo da oferta especial (ex: Volume Discount, Seasonal Discount)."
+
+      - name: offer_category
+        description: "Categoria da oferta especial."
+
+      - name: credit_card_id
+        description: "Identificador do cartão de crédito utilizado no pagamento do pedido."
+
+      - name: card_type
+        description: "Bandeira ou tipo do cartão de crédito (ex: Vista, MasterCard)."
+
+      - name: modified_date
+        description: "Data e hora da última modificação do registro no sistema fonte."
