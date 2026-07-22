@@ -6,19 +6,16 @@ models:
   # stg_production__product
   # ==========================================================
   - name: stg_production__product
-
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       Product da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: product_id
         description: Identificador único do produto.
-        tests:
+        data_tests:
           - unique
           - not_null
 
@@ -98,25 +95,22 @@ models:
   # stg_production__product_subcategory
   # ==========================================================
   - name: stg_production__product_subcategory
-
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       ProductSubcategory da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: product_subcategory_id
         description: Identificador único da subcategoria do produto.
-        tests:
+        data_tests:
           - unique
           - not_null
 
       - name: product_category_id
         description: Identificador da categoria à qual a subcategoria pertence.
-        tests:
+        data_tests:
           - not_null
 
       - name: product_subcategory_name
@@ -132,19 +126,16 @@ models:
   # stg_production__product_category
   # ==========================================================
   - name: stg_production__product_category
-
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       ProductCategory da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: product_category_id
         description: Identificador único da categoria do produto.
-        tests:
+        data_tests:
           - unique
           - not_null
 
@@ -161,19 +152,16 @@ models:
   # stg_production__product_model
   # ==========================================================
   - name: stg_production__product_model
-
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       ProductModel da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: product_model_id
         description: Identificador único do modelo do produto.
-        tests:
+        data_tests:
           - unique
           - not_null
 
@@ -196,19 +184,16 @@ models:
   # stg_production__product_description
   # ==========================================================
   - name: stg_production__product_description
-
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       ProductDescription da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: product_description_id
         description: Identificador único da descrição do produto.
-        tests:
+        data_tests:
           - unique
           - not_null
 
@@ -225,24 +210,21 @@ models:
   # stg_production__product_model_product_description_culture
   # ==========================================================
   - name: stg_production__product_model_product_description_culture
-
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       ProductModelProductDescriptionCulture da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: product_model_id
         description: Identificador do modelo do produto.
-        tests:
+        data_tests:
           - not_null
 
       - name: product_description_id
         description: Identificador da descrição do produto.
-        tests:
+        data_tests:
           - not_null
 
       - name: culture_id

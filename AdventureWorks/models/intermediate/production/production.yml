@@ -8,10 +8,9 @@ models:
       descrição para servir de base à dimensão de produtos.
 
     columns:
-
       - name: product_id
         description: Identificador único do produto.
-        tests:
+        data_tests:
           - unique
           - not_null
 

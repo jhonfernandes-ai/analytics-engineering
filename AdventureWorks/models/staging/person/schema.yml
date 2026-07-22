@@ -6,19 +6,16 @@ models:
   # stg_person__business_entity
   # ==========================================================
   - name: stg_person__business_entity
-
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       BusinessEntity da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: business_entity_id
         description: Identificador único da entidade de negócio.
-        tests:
+        data_tests:
           - unique
           - not_null
 
@@ -27,6 +24,7 @@ models:
 
       - name: modified_date
         description: Data da última atualização do registro.
+
   # ==========================================================
   # stg_person__person
   # ==========================================================
@@ -34,15 +32,14 @@ models:
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       Person da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: business_entity_id
         description: Identificador da entidade de negócio associada à pessoa.
-        tests:
+        data_tests:
+          - unique
           - not_null
 
       - name: person_type
@@ -85,29 +82,26 @@ models:
   # stg_person__business_entity_address
   # ==========================================================
   - name: stg_person__business_entity_address
-
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       BusinessEntityAddress da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: business_entity_id
         description: Identificador da entidade de negócio.
-        tests:
+        data_tests:
           - not_null
 
       - name: address_id
         description: Identificador do endereço.
-        tests:
+        data_tests:
           - not_null
 
       - name: address_type_id
         description: Identificador do tipo de endereço.
-        tests:
+        data_tests:
           - not_null
 
       - name: row_guid
@@ -116,24 +110,20 @@ models:
       - name: modified_date
         description: Data da última atualização do registro.
 
-
   # ==========================================================
   # stg_person__address
   # ==========================================================
   - name: stg_person__address
-
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       Address da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: address_id
         description: Identificador único do endereço.
-        tests:
+        data_tests:
           - unique
           - not_null
 
@@ -165,19 +155,16 @@ models:
   # stg_person__address_type
   # ==========================================================
   - name: stg_person__address_type
-
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       AddressType da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: address_type_id
         description: Identificador único do tipo de endereço.
-        tests:
+        data_tests:
           - unique
           - not_null
 
@@ -194,19 +181,16 @@ models:
   # stg_person__state_province
   # ==========================================================
   - name: stg_person__state_province
-
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       StateProvince da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: state_province_id
         description: Identificador único do estado ou província.
-        tests:
+        data_tests:
           - unique
           - not_null
 
@@ -235,19 +219,16 @@ models:
   # stg_person__country_region
   # ==========================================================
   - name: stg_person__country_region
-
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       CountryRegion da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: country_region_code
         description: Código único do país ou região.
-        tests:
+        data_tests:
           - unique
           - not_null
 
@@ -261,24 +242,21 @@ models:
   # stg_person__email_address
   # ==========================================================
   - name: stg_person__email_address
-
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       EmailAddress da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: business_entity_id
         description: Identificador da entidade de negócio.
-        tests:
+        data_tests:
           - not_null
 
       - name: email_address_id
         description: Identificador do endereço de e-mail.
-        tests:
+        data_tests:
           - unique
           - not_null
 
@@ -295,19 +273,16 @@ models:
   # stg_person__person_phone
   # ==========================================================
   - name: stg_person__person_phone
-
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       PersonPhone da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: business_entity_id
         description: Identificador da entidade de negócio.
-        tests:
+        data_tests:
           - not_null
 
       - name: phone_number
@@ -323,19 +298,16 @@ models:
   # stg_person__phone_number_type
   # ==========================================================
   - name: stg_person__phone_number_type
-
     description: >
       Modelo de staging responsável por padronizar os dados da tabela
       PhoneNumberType da camada Bronze.
-
       Nesta etapa são realizadas apenas padronizações de nomenclatura das
       colunas utilizando snake_case. Nenhuma regra de negócio é aplicada.
 
     columns:
-
       - name: phone_number_type_id
         description: Identificador único do tipo de telefone.
-        tests:
+        data_tests:
           - unique
           - not_null
 
