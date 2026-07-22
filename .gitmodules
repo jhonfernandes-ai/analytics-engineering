@@ -1,3 +1,0 @@
-[submodule "dbt_northwind"]
-	path = dbt_northwind
-	url = https://github.com/dpavancini/dbt_northwind
