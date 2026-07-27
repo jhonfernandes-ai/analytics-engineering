@@ -4,6 +4,8 @@ Modelo.......: dim_product
 Descrição....: Dimensão de produtos para a camada Gold. Limpa atributos, 
                trata valores nulos e consolida a hierarquia (Categoria > Subcategoria).
 Granularidade: 1 registro por produto.
+Autor........: Jonathas Fernandes
+Projeto......: AdventureWorks Analytics Engineering Challenge
 ------------------------------------------------------------------------------
 */
 

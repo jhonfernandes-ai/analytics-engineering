@@ -1,3 +1,14 @@
+/*
+------------------------------------------------------------------------------
+Modelo.......: dim_date
+Descrição....: Dimensão de calendario para a camada Gold. 
+Granularidade: 1 registro por dia 01/01/2000 á 31/12/2030 (date_day).
+
+Autor........: Jonathas Fernandes
+Projeto......: AdventureWorks Analytics Engineering Challenge
+------------------------------------------------------------------------------
+*/
+
 {{ config(
     materialized='table',
     file_format='delta'

@@ -17,6 +17,8 @@ Enriquece os dados com:
 Granularidade:
 1 registro por customer.
 
+Autor........: Jonathas Fernandes
+Projeto......: AdventureWorks Analytics Engineering Challenge
 ------------------------------------------------------------------------------
 */
 

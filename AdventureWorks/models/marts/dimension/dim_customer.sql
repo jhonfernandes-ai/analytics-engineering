@@ -1,12 +1,3 @@
-/*
-------------------------------------------------------------------------------
-Modelo.......: dim_customer
-Descrição....: Dimensão de clientes para a camada Gold. Unifica os clientes
-               pessoa física (B2C) e jurídica/lojas (B2B), enriquecendo com 
-               informações geográficas de endereço.
-Granularidade: 1 registro por cliente (customer_id).
-------------------------------------------------------------------------------
-*/
 
 /*
 ------------------------------------------------------------------------------
@@ -15,6 +6,9 @@ Descrição....: Dimensão de clientes para a camada Gold. Unifica os clientes
                pessoa física (B2C) e jurídica/lojas (B2B), enriquecendo com 
                informações geográficas de endereço.
 Granularidade: 1 registro por cliente (customer_id).
+
+Autor........: Jonathas Fernandes
+Projeto......: AdventureWorks Analytics Engineering Challenge
 ------------------------------------------------------------------------------
 */
 

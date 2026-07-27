@@ -4,6 +4,9 @@ Modelo.......: bridge_sales_reason
 Descrição....: Tabela Ponte (Bridge) para resolver o relacionamento N:M 
                entre Pedidos e Motivos de Venda.
 Granularidade: 1 registro por Motivo associado a um Pedido.
+
+Autor........: Jonathas Fernandes
+Projeto......: AdventureWorks Analytics Engineering Challenge
 ------------------------------------------------------------------------------
 */
 
