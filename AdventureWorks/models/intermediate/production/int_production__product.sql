@@ -9,6 +9,8 @@ de um item por pedido.
 Granularidade:
 1 registro por item de produto (Product).
 
+Autor........: Jonathas Fernandes
+Projeto......: AdventureWorks Analytics Engineering Challenge
 ------------------------------------------------------------------------------
 */
 

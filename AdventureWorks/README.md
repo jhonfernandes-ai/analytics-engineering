@@ -1,10 +1,10 @@
-# 🚴 Adventure Works - Data Warehouse & Analytics Engineering
+#  Adventure Works - Data Warehouse & Analytics Engineering
 
 Este repositório contém a solução fim a fim de Engenharia e Análise de Dados para a **Adventure Works**, utilizando **Databricks**, **dbt Cloud** e **Power BI**.
 
 ---
 
-## 🎯 Objetivos do Projeto
+##  Objetivos do Projeto
 * Consolidação dos dados operacionais (ERP/CRM) do Adventure Works em um Data Lakehouse/DW moderno.
 * Modelagem em **Star Schema** (Dimensional) para facilitar análises de vendas, clientes, produtos e motivos de compra.
 * Implementação de testes automatizados de qualidade e integridade referencial de dados.
@@ -12,7 +12,7 @@ Este repositório contém a solução fim a fim de Engenharia e Análise de Dado
 
 ---
 
-## 🏗️ Arquitetura da Solução
+##  Arquitetura da Solução
     [ ERP / Dados Brutos (OLTP) ]
                   │
                   ▼
@@ -29,9 +29,58 @@ Este repositório contém a solução fim a fim de Engenharia e Análise de Dado
 * **Qualidade & Testes:** dbt test (`unique`, `not_null`, `relationships`)
 * **Visualização:** Power BI
 
+### Estrutura do Projeto dbt
+
+models/
+├── sources.yml
+│
+├── staging/
+│   ├── sales/
+│   │   ├── _sales__models.yml
+│   │   ├── stg_sales__sales_order_header.sql
+│   │   ├── stg_sales__sales_order_detail.sql
+│   │   ├── stg_sales__customer.sql
+│   │   ├── stg_sales__credit_card.sql
+│   │   ├── stg_sales__sales_reason.sql
+│   │   ├── stg_sales__sales_order_header_sales_reason.sql
+│   │   ├── stg_sales__sales_person.sql
+│   │   └── stg_sales__sales_territory.sql
+│   ├── production/
+│   │   ├── _production__models.yml
+│   │   ├── stg_production__product.sql
+│   │   ├── stg_production__product_subcategory.sql
+│   │   └── stg_production__product_category.sql
+│   └── person/
+│       ├── _person__models.yml
+│       ├── stg_person__person.sql
+│       ├── stg_person__business_entity.sql
+│       ├── stg_person__address.sql
+│       ├── stg_person__state_province.sql
+│       └── stg_person__country_region.sql
+│
+├── intermediate/
+│   ├── _intermediate__models.yml
+│   ├── int_sales__orders.sql
+│   ├── int_sales__order_items.sql
+│   ├── int_sales__sales_reason.sql
+│   ├── int_sales__promotion.sql
+│   ├── int_person__customer.sql
+│   ├── int_person__geography.sql
+│   └── int_production__product.sql
+│
+└── marts/
+    ├── dimension/
+    │   ├── dim_date.sql
+    │   ├── dim_customer.sql
+    │   ├── dim_product.sql
+    │   └── bridge_sales_reason.sql
+    └── facts/
+        ├── bridge_sales_reason.sql
+        └──  fact_sales.sql
+
 ---
 
-## 📊 Matriz de KPIs e Métricas de Negócio
+##  Matriz de KPIs e Métricas de Negócio
 
 | Métrica / KPI | Definição / Regra de Negócio | Localização no dbt |
 | :--- | :--- | :--- |
@@ -45,7 +94,7 @@ Este repositório contém a solução fim a fim de Engenharia e Análise de Dado
 
 ---
 
-## 📐 Modelagem Dimensional (Star Schema)
+##  Modelagem Dimensional (Star Schema)
 
 A camada **Marts (Gold)** foi modelada no padrão dimensional de Kimball:
 
@@ -55,11 +104,11 @@ A camada **Marts (Gold)** foi modelada no padrão dimensional de Kimball:
 * **`dim_date`**: Dimensão calendário para análise temporal detalhada.
 * **`dim_sales_reason` & `bridge_sales_reason`**: Tabela ponte para resolver o relacionamento $N:M$ de motivos de venda sem duplicar métricas financeiras.
 
-> 📄 *O diagrama conceitual do modelo ER/Dimensional está disponível na pasta `docs/diagrama_conceitual_dw.pdf`.*
+>  *O diagrama conceitual do modelo ER/Dimensional está disponível na pasta `docs/diagrama_conceitual_dw.pdf`.*
 
 ---
 
-## 🛡️ Testes de Qualidade de Dados & Governança
+##  Testes de Qualidade de Dados & Governança
 
 Para garantir integridade de dados e taxa zero de registros órfãos, foram aplicados os seguintes testes via dbt:
 

@@ -9,6 +9,9 @@ Tabela Fato de Vendas na granularidade de item de pedido.
 Consolida métricas financeiras, quantitativas e chaves para dimensões.
 
 Granularidade: 1 registro por item de pedido (sales_order_detail_id).
+
+Autor........: Jonathas Fernandes
+Projeto......: AdventureWorks Analytics Engineering Challenge
 ------------------------------------------------------------------------------
 */
 
@@ -44,7 +47,7 @@ select
     sales_order_number,
     status,
     online_order_flag,
-    card_type,
+    coalesce(card_type, 'Não Especificado') as card_type,
 
     -- Datas (Dimensão Tempo)
     order_date,
@@ -60,8 +63,8 @@ select
     line_total_amount as net_amount,
 
     -- Calculados de Receita e Desconto
-    (order_quantity * unit_price_amount) as gross_amount,
-    (order_quantity * unit_price_amount * unit_price_discount_amount) as total_discount_amount,
+    (order_quantity * unit_price_amount) as gross_amount, --Valor Bruto
+    (order_quantity * unit_price_amount * unit_price_discount_amount) as total_discount_amount, --Valor Líquido
 
     -- Valores do Cabeçalho do Pedido (Frete e Impostos)
     subtotal_amount,
