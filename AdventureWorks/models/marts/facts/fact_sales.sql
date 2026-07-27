@@ -63,8 +63,8 @@ select
     line_total_amount as net_amount,
 
     -- Calculados de Receita e Desconto
-    (order_quantity * unit_price_amount) as gross_amount,
-    (order_quantity * unit_price_amount * unit_price_discount_amount) as total_discount_amount,
+    (order_quantity * unit_price_amount) as gross_amount, --Valor Bruto
+    (order_quantity * unit_price_amount * unit_price_discount_amount) as total_discount_amount, --Valor Líquido
 
     -- Valores do Cabeçalho do Pedido (Frete e Impostos)
     subtotal_amount,
